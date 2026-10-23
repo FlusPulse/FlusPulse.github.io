@@ -387,47 +387,140 @@
       color: var(--muted);
     }
 
-    .gallery {
+    .product-preview {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 22px;
-      align-items: stretch;
+      grid-template-columns: 0.9fr 1.2fr 0.9fr;
+      gap: 16px;
+      align-items: start;
     }
 
-    .photo-card,
-    .stack-card {
-      border-radius: 28px;
-      overflow: hidden;
+    .preview-window {
+      min-width: 0;
+      padding: 16px;
+      border-radius: 18px;
       border: 1px solid var(--line);
       background: rgba(16, 31, 43, 0.8);
-      box-shadow: 0 26px 60px rgba(0,0,0,0.18);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.16);
     }
 
-    .photo-card img {
-      width: 100%;
-      height: 100%;
-      min-height: 420px;
-      object-fit: cover;
-      filter: saturate(1.08) contrast(1.05);
+    .preview-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 14px;
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 800;
     }
 
-    .stack-card {
-      padding: 20px;
+    .preview-subtitle {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.76rem;
+    }
+
+    .preview-contact {
       display: grid;
-      gap: 16px;
-    }
-
-    .mini-image {
-      border-radius: 20px;
-      overflow: hidden;
-      min-height: 170px;
+      grid-template-columns: 34px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 0;
       border: 1px solid var(--line);
+      border-width: 0 0 1px;
     }
 
-    .mini-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .preview-contact:last-child { border-bottom: 0; }
+
+    .preview-avatar {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #07171e;
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .preview-contact strong,
+    .preview-contact small {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .preview-contact strong { font-size: 0.76rem; }
+    .preview-contact small { color: var(--muted); font-size: 0.66rem; }
+
+    .preview-time {
+      color: var(--muted);
+      font-size: 0.62rem;
+      white-space: nowrap;
+    }
+
+    .preview-messages {
+      display: grid;
+      gap: 12px;
+      padding-block: 8px 4px;
+    }
+
+    .preview-bubble {
+      width: fit-content;
+      max-width: 88%;
+      padding: 10px 12px;
+      border-radius: 13px;
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      font-size: 0.76rem;
+    }
+
+    .preview-bubble.outgoing {
+      justify-self: end;
+      background: linear-gradient(135deg, rgba(122,215,255,.82), rgba(137,255,212,.82));
+      color: #07171e;
+    }
+
+    .preview-call {
+      display: grid;
+      justify-items: center;
+      gap: 8px;
+      min-height: 218px;
+      padding: 25px 12px 18px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 50% 25%, rgba(137,255,212,.18), transparent 48%), #0d1d2a;
+      text-align: center;
+    }
+
+    .preview-call .preview-avatar { width: 58px; height: 58px; font-size: 1.1rem; }
+    .preview-call strong { font-size: 0.86rem; }
+    .preview-call small { color: var(--muted); font-size: 0.7rem; }
+
+    .call-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .call-action {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      font-size: 0.72rem;
+    }
+
+    .call-action.end { background: #dc5961; color: white; }
+
+    .preview-caption {
+      margin: 12px 2px 0;
+      color: var(--muted);
+      font-size: 0.72rem;
+      line-height: 1.4;
     }
 
     .info-list {
@@ -523,7 +616,7 @@
     }
 
     @media (max-width: 900px) {
-      .hero-grid, .features, .gallery, .stats { grid-template-columns: 1fr; }
+      .hero-grid, .features, .product-preview, .stats { grid-template-columns: 1fr; }
       .nav { display: none; }
       .showcase { min-height: 540px; }
       .section-head { display: block; }
@@ -540,8 +633,8 @@
       </div>
       <nav class="nav" aria-label="Главная навигация">
         <a href="#features">Возможности</a>
-        <a href="#flux">Flux</a>
         <a href="#about">О проекте</a>
+        <a href="#flux">Flux</a>
         <a href="terms.html">Условия</a>
         <a href="requisites.html">Реквизиты</a>
         <a class="nav-cta" href="#start">Начать</a>
@@ -553,19 +646,19 @@
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <span class="eyebrow">Новое общение</span>
-          <h1>Связь <span class="gradient-text">без лишнего шума</span></h1>
-          <p class="lead">FlusPulse — это современный мессенджер для быстрой коммуникации, приватных комнат и прямых звонков без перегруженных сервисов.</p>
+          <span class="eyebrow">Сообщения · комнаты · звонки</span>
+          <h1>FlusPulse</h1>
+          <p class="lead">Мессенджер для личных разговоров и общих комнат. Переписывайтесь, находите контакты и переходите к голосовым или видеозвонкам в одном приложении.</p>
 
           <div class="hero-actions">
-            <a class="button primary" href="#about">Подробнее о проекте</a>
-            <a class="button secondary" href="privacy.html">Политика конфиденциальности</a>
+            <a class="button primary" href="#features">Возможности</a>
+            <a class="button secondary" href="#about">Посмотреть интерфейс</a>
           </div>
 
           <div class="hero-stats">
-            <div><strong>2x</strong> быстрее обычного чата</div>
-            <div><strong>24/7</strong> актуальный обмен данными</div>
-            <div><strong>100%</strong> прямое соединение</div>
+            <div><strong>Переписка</strong> личные диалоги</div>
+            <div><strong>Звонки</strong> аудио и видео</div>
+            <div><strong>Комнаты</strong> для общения вместе</div>
           </div>
         </div>
 
@@ -615,79 +708,88 @@
       </div>
     </section>
 
-    <section id="flux">
-      <div class="container">
-        <div class="section-head">
-          <h2>Цифровой баланс Flux</h2>
-          <p>Flux используется внутри FlusPulse для виртуальных подарков. Это цифровой товар: доставка выполняется зачислением на аккаунт после подтверждения платежа YooKassa.</p>
-        </div>
-
-        <div class="features">
-          <article class="feature">
-            <div class="feature-icon" aria-hidden="true">₽</div>
-            <h3>Фиксированная цена</h3>
-            <p><strong>1 Flux — 1,65 ₽.</strong> Сумма платежа рассчитывается по этому фиксированному курсу. Например, 100 Flux стоят 165 ₽.</p>
-          </article>
-
-          <article class="feature">
-            <div class="feature-icon" aria-hidden="true">↗</div>
-            <h3>Цифровая доставка</h3>
-            <p>После подтверждения оплаты YooKassa сервер начисляет Flux на баланс аккаунта FlusPulse. Физическая доставка не требуется.</p>
-          </article>
-
-          <article class="feature">
-            <div class="feature-icon" aria-hidden="true">F</div>
-            <h3>Использование</h3>
-            <p>Баланс можно использовать для виртуальных подарков в приложении. Вывод Flux в рубли не поддерживается.</p>
-          </article>
-        </div>
-
-        <p class="lead" style="margin-top:24px;">Перед оплатой ознакомьтесь с <a href="terms.html">условиями</a> и <a href="requisites.html">реквизитами продавца</a>. По вопросам оплаты: <a href="mailto:FlusPulse@gmail.com">FlusPulse@gmail.com</a>.</p>
-      </div>
-    </section>
-
     <section id="features">
       <div class="container">
         <div class="section-head">
-          <h2>Почему это удобно</h2>
-          <p>Всё важное объединено в одном приложении: быстрые сообщения, контакты, комнаты и голосовая связь.</p>
+          <h2>Общение в одном месте</h2>
+          <p>Начните с сообщения, продолжите звонком или соберите собеседников в комнате.</p>
         </div>
 
         <div class="features">
           <article class="feature">
             <div class="feature-icon">⚡</div>
-            <h3>Мгновенная связь</h3>
-            <p>Сообщения и соединения создаются быстро, без лишних шагов и тормозящей навигации.</p>
+            <h3>Личные переписки</h3>
+            <p>Находите контакты, открывайте диалог и возвращайтесь к нему из списка чатов.</p>
           </article>
 
           <article class="feature">
             <div class="feature-icon">🔒</div>
-            <h3>Приватность</h3>
-            <p>Подход рассчитан на безопасное общение, контроль доступа и аккуратную работу с данными пользователя.</p>
+            <h3>Голос и видео</h3>
+            <p>Переходите от текста к аудио- или видеозвонку из разговора.</p>
           </article>
 
           <article class="feature">
             <div class="feature-icon">🎧</div>
-            <h3>Голос и комнаты</h3>
-            <p>Поддержка аудио- и видеосвязи, а также отдельно выделенных комнат для общения и командной работы.</p>
+            <h3>Комнаты для компании</h3>
+            <p>Создавайте комнату и приглашайте собеседников присоединиться к общему разговору.</p>
           </article>
         </div>
       </div>
     </section>
 
     <section id="about">
-      <div class="container gallery">
-        <div class="photo-card">
-          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" alt="Команда работает вместе">
+      <div class="container">
+        <div class="section-head">
+          <h2>Посмотрите, как это устроено</h2>
+          <p>Основные сценарии FlusPulse — список чатов, переписка и звонок — собраны в понятном интерфейсе.</p>
         </div>
+        <div class="product-preview" aria-label="Превью интерфейса FlusPulse">
+          <article class="preview-window">
+            <div class="preview-heading"><span>FlusPulse</span><span>Чаты</span></div>
+            <p class="preview-subtitle">Ваши разговоры</p>
+            <div class="preview-contact">
+              <span class="preview-avatar">А</span>
+              <span><strong>Анна</strong><small>Уже выхожу</small></span>
+              <span class="preview-time">12:42</span>
+            </div>
+            <div class="preview-contact">
+              <span class="preview-avatar">К</span>
+              <span><strong>Команда</strong><small>Созвонимся позже?</small></span>
+              <span class="preview-time">11:18</span>
+            </div>
+            <div class="preview-contact">
+              <span class="preview-avatar">М</span>
+              <span><strong>Миша</strong><small>Отправил сообщение</small></span>
+              <span class="preview-time">Вчера</span>
+            </div>
+            <p class="preview-caption">Контакты и переписки под рукой</p>
+          </article>
 
-        <div class="stack-card">
-          <div class="mini-image">
-            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=80" alt="Вид на рабочее пространство">
-          </div>
-          <div class="mini-image">
-            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1000&q=80" alt="Встреча и обсуждение">
-          </div>
+          <article class="preview-window">
+            <div class="preview-heading"><span>Диалог</span><span>Анна · в сети</span></div>
+            <p class="preview-subtitle">Личная переписка</p>
+            <div class="preview-messages">
+              <div class="preview-bubble">Привет! Ты уже рядом?</div>
+              <div class="preview-bubble outgoing">Да, буду через пять минут.</div>
+              <div class="preview-bubble">Хорошо, тогда наберу тебя.</div>
+            </div>
+            <p class="preview-caption">Начните с сообщения и продолжите разговор звонком</p>
+          </article>
+
+          <article class="preview-window">
+            <div class="preview-heading"><span>Звонок</span><span>Аудио · видео</span></div>
+            <div class="preview-call">
+              <span class="preview-avatar">А</span>
+              <strong>Анна</strong>
+              <small>Вызов соединён</small>
+              <div class="call-actions" aria-hidden="true">
+                <span class="call-action">Мик.</span>
+                <span class="call-action">Кам.</span>
+                <span class="call-action end">×</span>
+              </div>
+            </div>
+            <p class="preview-caption">Голосовые и видеозвонки в чате</p>
+          </article>
         </div>
       </div>
 
@@ -696,46 +798,47 @@
           <div class="info-item">
             <div class="info-check">✓</div>
             <div>
-              <strong>Создавайте комнаты</strong><br>
-              Одна команда запускает активную сессию, а остальные подключаются за секунды.
+              <strong>Находите собеседников</strong><br>
+              Ищите людей по ID или имени пользователя и добавляйте их в контакты.
             </div>
           </div>
 
           <div class="info-item">
             <div class="info-check">✓</div>
             <div>
-              <strong>Используйте быстрое общение</strong><br>
-              Вся коммуникация вынесена в понятный интерфейс без лишней перегруженности.
+              <strong>Общайтесь как удобно</strong><br>
+              Переписывайтесь один на один или переходите к разговору в общей комнате.
             </div>
           </div>
 
           <div class="info-item">
             <div class="info-check">✓</div>
             <div>
-              <strong>Держите связь под контролем</strong><br>
-              Доступ, комнаты и авторизация настроены так, чтобы пользователь всегда понимал процесс.
+              <strong>Продолжайте разговор голосом</strong><br>
+              Начните аудио- или видеозвонок прямо из диалога.
             </div>
           </div>
         </div>
       </div>
 
-      <div class="container stats">
-        <div class="stat">
-          <strong>1</strong>
-          <span>приложение</span>
+      <div class="container" style="margin-top:32px;">
+        <div class="cta-box">
+          <div>
+            <h3>Один разговор — много способов быть на связи</h3>
+            <p>Сообщения, контакты, комнаты и звонки в FlusPulse.</p>
+          </div>
+          <a class="button primary" href="#start">Узнать о FlusPulse</a>
         </div>
-        <div class="stat">
-          <strong>3+</strong>
-          <span>формата связи</span>
+      </div>
+    </section>
+
+    <section id="flux">
+      <div class="container">
+        <div class="section-head">
+          <h2>Flux внутри приложения</h2>
+          <p>Баланс используется для виртуальных подарков и не выводится в рубли. Оплата зачисляется на аккаунт после подтверждения YooKassa.</p>
         </div>
-        <div class="stat">
-          <strong>24/7</strong>
-          <span>работа сервиса</span>
-        </div>
-        <div class="stat">
-          <strong>∞</strong>
-          <span>простота</span>
-        </div>
+        <p class="lead"><strong>1 Flux — 1,65 ₽.</strong> Например, 100 Flux стоят 165 ₽. Перед оплатой ознакомьтесь с <a href="terms.html">условиями</a> и <a href="requisites.html">реквизитами продавца</a>. Вопросы: <a href="mailto:FlusPulse@gmail.com">FlusPulse@gmail.com</a>.</p>
       </div>
     </section>
 
